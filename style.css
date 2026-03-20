@@ -8,6 +8,7 @@ header {
   height: 80px;
   position: sticky;
   top: 0;
+  box-shadow: 0 0px 20px -5px #00000066;
   z-index: 1000;
 }
 
@@ -47,4 +48,74 @@ header .container nav ul li a {
 header .container nav ul li a:hover {
   opacity: 0.8;
   padding-inline: 1rem;
+}
+
+main {
+  display: grid;
+  place-items: center;
+  background: var(--primary-color);
+  padding: 4rem 2rem;
+  min-height: 100vh;
+  row-gap: 6rem;
+}
+
+main section {
+  display: grid;
+  place-items: center;
+  max-width: 80%;
+  width: 100%;
+}
+
+main section:first-of-type {
+  margin-top: 5rem;
+}
+
+main section .header {
+  display: grid;
+  place-items: center;
+  background: #00030699;
+  color: var(--secondary-color);
+  border-radius: 0.6rem;
+  padding: 0.6rem 2rem;
+  text-align: center;
+  box-shadow: 0 12px 17px -4px #0000009c;
+}
+
+main section .body {
+  display: grid;
+}
+
+main section .body img {
+  width: 100%;
+  max-width: 100rem;
+  place-self: center;
+}
+
+main section .body article {
+  display: grid;
+  place-items: center;
+  background: #00030638;
+  color: var(--secondary-color);
+  border-radius: 0.6rem;
+  padding: 0.6rem 2rem;
+  width: 100%;
+  text-align: center;
+}
+
+main section .body article h1 {
+  font-size: var(--fs-lg);
+  font-weight: 800;
+  letter-spacing: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+main section .body article p {
+  font-size: var(--fs-md);
+  font-weight: 500;
+  line-height: 1.6;
+  text-align: center;
+}
+
+main section .body:not(:has(> img)) {
+  margin-top: 4rem;
 }
