@@ -119,3 +119,35 @@ main section .body article p {
 main section .body:not(:has(> img)) {
   margin-top: 4rem;
 }
+
+@media (max-width: 720px) {
+  header .container {
+    justify-content: center;
+  }
+
+  header .container .logo_h1 {
+    display: none;
+  }
+
+  header .container nav {
+    width: 100%;
+  }
+
+  p {
+    line-break: anywhere;
+  }
+}
+
+@media (max-width: 420px) {
+  html {
+    font-size: 50%;
+  }
+
+  main {
+    padding: 2rem 1rem;
+  }
+
+  main section {
+    max-width: 95%;
+  }
+}
