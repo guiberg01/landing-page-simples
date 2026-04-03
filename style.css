@@ -403,7 +403,8 @@ main section .body article p {
 #sobre .sobre-stack li:hover {
   transform: translateY(-4px);
   border-color: color-mix(in srgb, var(--tech-accent) 56%, #ffffff);
-  box-shadow: 0 18px 34px -20px color-mix(in srgb, var(--tech-accent) 55%, #1d2b4a);
+  box-shadow: 0 18px 34px -20px
+    color-mix(in srgb, var(--tech-accent) 55%, #1d2b4a);
 }
 
 #sobre .sobre-stack li:hover::after {
@@ -415,12 +416,16 @@ main section .body article p {
   height: 3.2rem;
   display: block;
   grid-row: 1 / span 2;
-  transition: transform 0.25s ease, filter 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    filter 0.25s ease;
 }
 
 #sobre .sobre-stack li:hover .tech-icon {
   transform: scale(1.08);
-  filter: drop-shadow(0 6px 14px color-mix(in srgb, var(--tech-accent) 45%, transparent));
+  filter: drop-shadow(
+    0 6px 14px color-mix(in srgb, var(--tech-accent) 45%, transparent)
+  );
 }
 
 #sobre .sobre-stack strong {
@@ -460,8 +465,119 @@ main section .body article p {
   z-index: 1;
 }
 
-#contato .body article {
-  background: linear-gradient(150deg, #ebf6ff 0%, #e8fffa 100%);
+#contato .contato-layout {
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  gap: 1.4rem;
+}
+
+#contato .contato-info {
+  background: linear-gradient(145deg, #ebf6ff 0%, #e8fffa 100%);
+  border: 1px solid #cae8ef;
+}
+
+#contato .contato-info h1 {
+  font-size: clamp(2.4rem, 3vw, 3.2rem);
+}
+
+#contato .contato-info p {
+  color: var(--text-secondary);
+  margin-bottom: 1.4rem;
+}
+
+#contato .contato-info ul {
+  display: grid;
+  gap: 1rem;
+}
+
+#contato .contato-info li {
+  display: grid;
+  gap: 0.2rem;
+  padding: 1rem 1.1rem;
+  border-radius: 1.1rem;
+  background: #ffffff;
+  border: 1px solid #d8e8f6;
+}
+
+#contato .contato-info .label {
+  font-size: 1.2rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #5b6f8c;
+  font-weight: 800;
+}
+
+#contato .contato-info a,
+#contato .contato-info span {
+  font-size: var(--fs-sm);
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+
+#contato .contato-info a:hover {
+  color: var(--brand);
+}
+
+#contato .contato-form {
+  background: #ffffff;
+  border: 1px solid #d9e3f2;
+  border-radius: var(--radius-md);
+  padding: clamp(1.8rem, 3vw, 2.8rem);
+  display: grid;
+  gap: 1.2rem;
+}
+
+#contato .field {
+  display: grid;
+  gap: 0.6rem;
+}
+
+#contato .field label {
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+#contato .field input,
+#contato .field textarea {
+  width: 100%;
+  border-radius: 1rem;
+  border: 1px solid #cfdcee;
+  background: #f9fbff;
+  resize: block;
+  color: var(--text-primary);
+  font-family: var(--font-text);
+  font-size: var(--fs-sm);
+  padding: 1.2rem 1.4rem;
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+#contato .field input:focus,
+#contato .field textarea:focus {
+  outline: none;
+  border-color: #8bb2ff;
+  box-shadow: 0 0 0 0.3rem #376eff1f;
+}
+
+#contato .contato-form .btn {
+  justify-self: start;
+  min-width: 18rem;
+}
+
+#contato .form-status {
+  min-height: 2rem;
+  font-size: var(--fs-sm);
+  color: var(--brand-dark);
+}
+
+#contato .form-status.success {
+  color: #18864c;
+}
+
+#contato .form-status.error {
+  color: #b02a2a;
 }
 
 footer {
@@ -491,7 +607,8 @@ footer {
   #novidade .novidade-metricas,
   #novidade .novidade-pilares,
   #novidade .novidade-opinioes,
-  #sobre .sobre-stack ul {
+  #sobre .sobre-stack ul,
+  #contato .contato-layout {
     grid-template-columns: 1fr;
   }
 
@@ -518,6 +635,11 @@ footer {
 
   .btn {
     width: 100%;
+  }
+
+  #contato .contato-form .btn {
+    justify-self: stretch;
+    min-width: 0;
   }
 
   main {
