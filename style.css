@@ -403,7 +403,8 @@ main section .body article p {
 #sobre .sobre-stack li:hover {
   transform: translateY(-4px);
   border-color: color-mix(in srgb, var(--tech-accent) 56%, #ffffff);
-  box-shadow: 0 18px 34px -20px color-mix(in srgb, var(--tech-accent) 55%, #1d2b4a);
+  box-shadow: 0 18px 34px -20px
+    color-mix(in srgb, var(--tech-accent) 55%, #1d2b4a);
 }
 
 #sobre .sobre-stack li:hover::after {
@@ -415,12 +416,16 @@ main section .body article p {
   height: 3.2rem;
   display: block;
   grid-row: 1 / span 2;
-  transition: transform 0.25s ease, filter 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    filter 0.25s ease;
 }
 
 #sobre .sobre-stack li:hover .tech-icon {
   transform: scale(1.08);
-  filter: drop-shadow(0 6px 14px color-mix(in srgb, var(--tech-accent) 45%, transparent));
+  filter: drop-shadow(
+    0 6px 14px color-mix(in srgb, var(--tech-accent) 45%, transparent)
+  );
 }
 
 #sobre .sobre-stack strong {
@@ -543,7 +548,9 @@ main section .body article p {
   font-family: var(--font-text);
   font-size: var(--fs-sm);
   padding: 1.2rem 1.4rem;
-  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 #contato .field input:focus,

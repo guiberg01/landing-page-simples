@@ -26,7 +26,7 @@ if (form && statusText) {
     ].join("\n");
 
     const mailtoUrl = `mailto:${emailDestino}?subject=${encodeURIComponent(
-      assunto
+      assunto,
     )}&body=${encodeURIComponent(corpo)}`;
 
     window.location.href = mailtoUrl;
