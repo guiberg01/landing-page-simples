@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Manrope:wght@400;600;700;800&display=swap");
 
 * {
   margin: 0;
@@ -6,7 +6,6 @@
   box-sizing: border-box;
   text-decoration: none;
   list-style: none;
-  font-family: "Lato", sans-serif;
 }
 
 html {
@@ -15,11 +14,34 @@ html {
 }
 
 :root {
-  --fs-sm: 1.6rem;
-  --fs-md: 1.8rem;
-  --fs-lg: 2rem;
-  --fs-xl: 2.4rem;
+  --font-title: "Space Grotesk", sans-serif;
+  --font-text: "Manrope", sans-serif;
 
-  --primary-color: #fff;
-  --secondary-color: #007bff;
+  --fs-sm: 1.4rem;
+  --fs-md: 1.8rem;
+  --fs-lg: 2.4rem;
+  --fs-xl: 4rem;
+
+  --bg: #f7f8fb;
+  --surface: #ffffff;
+  --surface-alt: #eef2ff;
+  --text-primary: #0e1a2b;
+  --text-secondary: #55657d;
+  --brand: #2359ff;
+  --brand-dark: #10359f;
+  --accent: #12b5a5;
+  --border: #d8e1f0;
+  --shadow: 0 14px 45px -24px #0d214a52;
+
+  --radius-sm: 1rem;
+  --radius-md: 1.8rem;
+  --radius-lg: 2.6rem;
+}
+
+body {
+  font-family: var(--font-text);
+  color: var(--text-primary);
+  background: radial-gradient(circle at 0% 0%, #dfe8ff 0%, transparent 40%),
+    radial-gradient(circle at 100% 0%, #dcfff8 0%, transparent 38%),
+    var(--bg);
 }
