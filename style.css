@@ -346,6 +346,48 @@ main section .body article p {
   background: linear-gradient(140deg, #2364ff12, #12b5a512);
 }
 
+#sobre .sobre-stack {
+  background: linear-gradient(140deg, #eef3ff 0%, #ebfffb 100%);
+  border: 1px solid #cfddf8;
+  border-radius: var(--radius-md);
+  padding: clamp(1.8rem, 3vw, 2.8rem);
+}
+
+#sobre .sobre-stack h4 {
+  font-family: var(--font-title);
+  font-size: clamp(2rem, 2.5vw, 2.8rem);
+  margin-bottom: 1.4rem;
+  color: var(--brand-dark);
+}
+
+#sobre .sobre-stack ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+#sobre .sobre-stack li {
+  display: grid;
+  gap: 0.5rem;
+  background: #ffffff;
+  border: 1px solid #d4e0f8;
+  border-radius: 1.3rem;
+  padding: 1.5rem;
+  box-shadow: 0 12px 26px -22px #2039695c;
+}
+
+#sobre .sobre-stack strong {
+  font-family: var(--font-title);
+  color: var(--text-primary);
+  font-size: 2rem;
+}
+
+#sobre .sobre-stack span {
+  color: var(--text-secondary);
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+}
+
 #contato .body article {
   background: linear-gradient(150deg, #ebf6ff 0%, #e8fffa 100%);
 }
@@ -376,7 +418,8 @@ footer {
 
   #novidade .novidade-metricas,
   #novidade .novidade-pilares,
-  #novidade .novidade-opinioes {
+  #novidade .novidade-opinioes,
+  #sobre .sobre-stack ul {
     grid-template-columns: 1fr;
   }
 
