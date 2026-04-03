@@ -21,10 +21,8 @@ header .container {
   max-width: 220rem;
 }
 
-header .container h1.logo_h1 {
-  font-size: var(--fs-xl);
-  font-weight: 800;
-  letter-spacing: 0.8rem;
+header .container img.logo {
+  height: 100%;
 }
 
 header .container nav {
@@ -41,7 +39,7 @@ header .container nav ul {
 
 header .container nav ul li a {
   font-size: var(--fs-md);
-  font-weight: 500;
+  font-weight: 700;
   color: var(--secondary-color);
   transition: 0.6s;
 }
@@ -123,10 +121,6 @@ main section .body:not(:has(> img)) {
 @media (max-width: 720px) {
   header .container {
     justify-content: center;
-  }
-
-  header .container .logo_h1 {
-    display: none;
   }
 
   header .container nav {
