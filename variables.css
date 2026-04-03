@@ -41,7 +41,7 @@ html {
 body {
   font-family: var(--font-text);
   color: var(--text-primary);
-  background: radial-gradient(circle at 0% 0%, #dfe8ff 0%, transparent 40%),
-    radial-gradient(circle at 100% 0%, #dcfff8 0%, transparent 38%),
-    var(--bg);
+  background:
+    radial-gradient(circle at 0% 0%, #dfe8ff 0%, transparent 40%),
+    radial-gradient(circle at 100% 0%, #dcfff8 0%, transparent 38%), var(--bg);
 }

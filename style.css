@@ -126,7 +126,10 @@ main {
   padding: 0.6rem 1.8rem;
   font-weight: 700;
   font-size: var(--fs-sm);
-  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
 }
 
 .btn-primary {
