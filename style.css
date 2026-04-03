@@ -544,6 +544,7 @@ main section .body article p {
   border-radius: 1rem;
   border: 1px solid #cfdcee;
   background: #f9fbff;
+  resize: block;
   color: var(--text-primary);
   font-family: var(--font-text);
   font-size: var(--fs-sm);
