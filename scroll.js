@@ -41,6 +41,7 @@ const header = document.getElementById("header");
 const headerNavLinks = [
   ...document.querySelectorAll('header nav a[href^="#"]'),
 ];
+const pageSections = [...document.querySelectorAll("main > section[id]")];
 const navLinkMap = new Map(
   headerNavLinks.map((link) => [link.getAttribute("href")?.slice(1), link]),
 );
@@ -54,6 +55,7 @@ let headerIsScrolled = false;
 let lastScrollProgress = -1;
 let activeSectionId = "";
 let maxScrollable = 0;
+let activeSectionMarker = 0;
 
 const setActiveNavLink = (sectionId) => {
   if (!sectionId || sectionId === activeSectionId) {
@@ -79,6 +81,27 @@ const updateLayoutMetrics = () => {
     document.documentElement.scrollHeight - window.innerHeight,
     0,
   );
+  activeSectionMarker = Math.max((header?.offsetHeight ?? 0) + 24, 0);
+};
+
+const updateActiveSection = () => {
+  if (!pageSections.length) {
+    return;
+  }
+
+  const scrollMarker = window.scrollY + activeSectionMarker;
+  let nextSectionId = pageSections[0].id;
+
+  for (const section of pageSections) {
+    if (section.offsetTop <= scrollMarker) {
+      nextSectionId = section.id;
+      continue;
+    }
+
+    break;
+  }
+
+  setActiveNavLink(nextSectionId);
 };
 
 const updateScrollEffects = () => {
@@ -119,6 +142,8 @@ const updateScrollEffects = () => {
     }
   }
 
+  updateActiveSection();
+
   isTicking = false;
 };
 
@@ -144,41 +169,7 @@ window.addEventListener(
 );
 
 if (navLinkMap.size) {
-  const sectionObserver = new IntersectionObserver(
-    (entries) => {
-      let bestEntry = null;
-
-      for (const entry of entries) {
-        if (!entry.isIntersecting) {
-          continue;
-        }
-
-        if (
-          !bestEntry ||
-          entry.intersectionRatio > bestEntry.intersectionRatio
-        ) {
-          bestEntry = entry;
-        }
-      }
-
-      if (bestEntry?.target?.id) {
-        setActiveNavLink(bestEntry.target.id);
-      }
-    },
-    {
-      threshold: [0.15, 0.35, 0.6],
-      rootMargin: "-28% 0px -55% 0px",
-    },
-  );
-
-  document.querySelectorAll("main > section[id]").forEach((section) => {
-    sectionObserver.observe(section);
-  });
-
-  const initialSection = document.querySelector("main > section[id]");
-  if (initialSection?.id) {
-    setActiveNavLink(initialSection.id);
-  }
+  updateActiveSection();
 }
 
 updateLayoutMetrics();
