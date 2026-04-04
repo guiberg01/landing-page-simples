@@ -3,11 +3,63 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Landing page de e-commerce com foco em agilidade, praticidade e opinioes reais para uma experiencia de compra moderna e confiavel."
+    />
+    <meta
+      name="keywords"
+      content="e-commerce, marketplace, compras online, opinioes de usuarios, checkout rapido, experiencia do cliente"
+    />
+    <meta name="author" content="Estudantes Facens" />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="Novo E-commerce | Agilidade, Praticidade e Opiniao Real"
+    />
+    <meta
+      property="og:description"
+      content="Conheca a plataforma que une velocidade, design moderno e decisoes de compra mais confiantes com opinioes reais."
+    />
+    <meta property="og:image" content="img/preview.png" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Novo E-commerce | Agilidade, Praticidade e Opiniao Real"
+    />
+    <meta
+      name="twitter:description"
+      content="Plataforma pensada para conversao, velocidade e experiencia premium de compra."
+    />
+    <meta name="twitter:image" content="img/preview.png" />
     <link rel="stylesheet" href="variables.css" />
     <link rel="stylesheet" href="style.css" />
-    <title>Landing Page</title>
+    <title>Novo E-commerce | Agilidade, Praticidade e Opiniao Real</title>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Novo E-commerce",
+        "inLanguage": "pt-BR",
+        "description": "Landing page de e-commerce com foco em agilidade, praticidade e opinioes reais.",
+        "publisher": {
+          "@type": "Organization",
+          "name": "Estudantes Facens"
+        }
+      }
+    </script>
   </head>
   <body>
+    <div id="loading-screen" class="loading-screen">
+      <div class="loading-content">
+        <img src="img/logo.png" alt="Logo" class="loading-logo" />
+        <div class="loading-spinner"></div>
+        <p class="loading-text">Carregando...</p>
+      </div>
+    </div>
+
     <header id="header">
       <div class="container">
         <img src="img/logo.png" alt="Logo do site" class="logo" />
@@ -68,7 +120,7 @@
 
         <div class="body">
           <article class="novidade-intro">
-            <h1>COMPRAR BEM, RAPIDO E COM CONFIANCA</h1>
+            <h3>COMPRAR BEM, RAPIDO E COM CONFIANCA</h3>
             <p>
               A proposta e simples: facilitar a decisao de compra com uma
               vitrine clara, recomendacoes inteligentes e destaque para as
@@ -138,7 +190,7 @@
 
         <div class="body">
           <article>
-            <h1>ESTUDANTES FACENS</h1>
+            <h3>ESTUDANTES FACENS</h3>
             <p>
               Somos estudantes da Facens, apaixonados por tecnologia e inovação.
               Estamos sempre em busca de aprender e criar soluções que possam
@@ -209,7 +261,7 @@
 
         <div class="body contato-layout">
           <article class="contato-info">
-            <h1>Vamos conversar sobre seu projeto</h1>
+            <h3>Vamos conversar sobre seu projeto</h3>
             <p>
               Estamos prontos para apresentar melhor a ideia, mostrar detalhes
               do produto e ouvir suas necessidades.
@@ -292,5 +344,7 @@
     </footer>
     <script src="script.js"></script>
     <script src="menu.js"></script>
+    <script src="loading.js"></script>
+    <script src="scroll.js"></script>
   </body>
 </html>
