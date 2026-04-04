@@ -73,6 +73,24 @@ header {
   transition: box-shadow 0.3s ease;
 }
 
+header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 0.3rem;
+  background: linear-gradient(90deg, var(--brand), var(--accent));
+  transform-origin: left center;
+  transform: scaleX(var(--scroll-progress, 0));
+  pointer-events: none;
+  opacity: 0.92;
+}
+
+header.is-scrolled {
+  box-shadow: 0 8px 24px -16px rgba(0, 0, 0, 0.26);
+}
+
 header .container {
   width: min(118rem, 92%);
   min-height: 8rem;
@@ -120,7 +138,15 @@ header .container nav ul li a:hover {
   color: var(--brand);
 }
 
+header .container nav ul li a.is-active {
+  color: var(--brand);
+}
+
 header .container nav ul li a:hover::after {
+  transform: scaleX(1);
+}
+
+header .container nav ul li a.is-active::after {
   transform: scaleX(1);
 }
 
@@ -243,6 +269,21 @@ main {
   border-radius: 2rem;
   padding: 1.8rem;
   box-shadow: 0 20px 30px -24px #15336759;
+}
+
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translate3d(0, 3.2rem, 0) scale(0.985);
+  will-change: transform, opacity;
+  transition:
+    opacity 0.52s ease-out var(--reveal-delay, 0ms),
+    transform 0.52s cubic-bezier(0.18, 0.8, 0.24, 1) var(--reveal-delay, 0ms);
+}
+
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+  will-change: auto;
 }
 
 .hero-card-title {
@@ -755,6 +796,10 @@ footer {
     background: #eaf0ff;
   }
 
+  header .container nav ul li a.is-active {
+    background: #dbe8ff;
+  }
+
   .hero {
     grid-template-columns: 1fr;
   }
@@ -792,5 +837,18 @@ footer {
 
   main section .body article p {
     line-break: anywhere;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-card {
+    transform: none;
+  }
+
+  .reveal-on-scroll {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    will-change: auto;
   }
 }

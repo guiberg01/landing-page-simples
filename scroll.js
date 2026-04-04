@@ -19,18 +19,14 @@ const uniqueTargets = [...new Set(revealTargets)];
 if (!prefersReducedMotion) {
   uniqueTargets.forEach((element, index) => {
     const delay = Math.min(index * 18, 220);
-    element.style.opacity = "0";
-    element.style.transform = "translate3d(0, 2.4rem, 0)";
-    element.style.willChange = "transform, opacity";
-    element.style.transition = `opacity 0.45s ease-out ${delay}ms, transform 0.45s ease-out ${delay}ms`;
+    element.classList.add("reveal-on-scroll");
+    element.style.setProperty("--reveal-delay", `${delay}ms`);
   });
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        entry.target.style.opacity = "1";
-        entry.target.style.transform = "translate3d(0, 0, 0)";
-        entry.target.style.willChange = "auto";
+        entry.target.classList.add("is-visible");
         observer.unobserve(entry.target);
       }
     });
@@ -42,23 +38,85 @@ if (!prefersReducedMotion) {
 }
 
 const header = document.getElementById("header");
-const heroCard = document.querySelector(".hero-card");
-const hasParallax =
-  window.matchMedia("(min-width: 921px)").matches && !prefersReducedMotion;
+const headerNavLinks = [
+  ...document.querySelectorAll('header nav a[href^="#"]'),
+];
+const navLinkMap = new Map(
+  headerNavLinks.map((link) => [link.getAttribute("href")?.slice(1), link]),
+);
+const isLowEndDevice =
+  Boolean(navigator.connection?.saveData) ||
+  (navigator.hardwareConcurrency > 0 && navigator.hardwareConcurrency <= 4);
 
 let isTicking = false;
+let lastScrollTop = -1;
+let headerIsScrolled = false;
+let lastScrollProgress = -1;
+let activeSectionId = "";
+let maxScrollable = 0;
+
+const setActiveNavLink = (sectionId) => {
+  if (!sectionId || sectionId === activeSectionId) {
+    return;
+  }
+
+  if (activeSectionId) {
+    const previousLink = navLinkMap.get(activeSectionId);
+    if (previousLink) {
+      previousLink.classList.remove("is-active");
+    }
+  }
+
+  const nextLink = navLinkMap.get(sectionId);
+  if (nextLink) {
+    nextLink.classList.add("is-active");
+    activeSectionId = sectionId;
+  }
+};
+
+const updateLayoutMetrics = () => {
+  maxScrollable = Math.max(
+    document.documentElement.scrollHeight - window.innerHeight,
+    0,
+  );
+};
 
 const updateScrollEffects = () => {
   const scrollTop = window.scrollY;
+  const previousScrollTop = lastScrollTop;
+  const delta = Math.abs(scrollTop - previousScrollTop);
+  const crossedHeaderThreshold =
+    (previousScrollTop <= 8 && scrollTop > 8) ||
+    (previousScrollTop > 8 && scrollTop <= 8);
 
-  if (header) {
-    header.style.boxShadow =
-      scrollTop > 8 ? "0 8px 24px -16px rgba(0, 0, 0, 0.26)" : "none";
+  if (scrollTop === previousScrollTop) {
+    isTicking = false;
+    return;
   }
 
-  if (hasParallax && heroCard) {
-    const parallaxCardOffset = Math.min(scrollTop * 0.08, 36);
-    heroCard.style.transform = `translate3d(0, ${parallaxCardOffset}px, 0)`;
+  if (delta < 1.2 && !crossedHeaderThreshold) {
+    isTicking = false;
+    return;
+  }
+
+  lastScrollTop = scrollTop;
+
+  if (header) {
+    const shouldHeaderBeScrolled = scrollTop > 8;
+
+    if (shouldHeaderBeScrolled !== headerIsScrolled) {
+      header.classList.toggle("is-scrolled", shouldHeaderBeScrolled);
+      headerIsScrolled = shouldHeaderBeScrolled;
+    }
+
+    const scrollProgress =
+      maxScrollable > 0 ? Math.min(scrollTop / maxScrollable, 1) : 0;
+    const progressThreshold = isLowEndDevice ? 0.012 : 0.0075;
+
+    if (Math.abs(scrollProgress - lastScrollProgress) >= progressThreshold) {
+      header.style.setProperty("--scroll-progress", scrollProgress.toFixed(4));
+      lastScrollProgress = scrollProgress;
+    }
   }
 
   isTicking = false;
@@ -75,4 +133,53 @@ window.addEventListener(
   { passive: true },
 );
 
+window.addEventListener(
+  "resize",
+  () => {
+    updateLayoutMetrics();
+    lastScrollTop = -1;
+    updateScrollEffects();
+  },
+  { passive: true },
+);
+
+if (navLinkMap.size) {
+  const sectionObserver = new IntersectionObserver(
+    (entries) => {
+      let bestEntry = null;
+
+      for (const entry of entries) {
+        if (!entry.isIntersecting) {
+          continue;
+        }
+
+        if (
+          !bestEntry ||
+          entry.intersectionRatio > bestEntry.intersectionRatio
+        ) {
+          bestEntry = entry;
+        }
+      }
+
+      if (bestEntry?.target?.id) {
+        setActiveNavLink(bestEntry.target.id);
+      }
+    },
+    {
+      threshold: [0.15, 0.35, 0.6],
+      rootMargin: "-28% 0px -55% 0px",
+    },
+  );
+
+  document.querySelectorAll("main > section[id]").forEach((section) => {
+    sectionObserver.observe(section);
+  });
+
+  const initialSection = document.querySelector("main > section[id]");
+  if (initialSection?.id) {
+    setActiveNavLink(initialSection.id);
+  }
+}
+
+updateLayoutMetrics();
 updateScrollEffects();
